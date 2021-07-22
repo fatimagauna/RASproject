@@ -11,7 +11,7 @@ GPIO.setup(dirA1,GPIO.OUT)
 GPIO.setup(dirA2,GPIO.OUT)
 GPIO.setup(spdA,GPIO.OUT)
 pwmA=GPIO.PWM(spdA,1000)
-pwmA.start(10)
+pwmA.start(0)
 
 while(1):
     GPIO.output(dirA1,True)
