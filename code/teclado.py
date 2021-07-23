@@ -34,6 +34,12 @@ try:
 		if ((cv2.waitKey(33) == -1) and (x == 1)):
 			print ("Ninguna")
 			x = 0
+			GPIO.output(dirA1,False)
+			GPIO.output(dirA2,False)
+			GPIO.output(dirB1,False)
+			GPIO.output(dirB2,False)
+			pwmA.ChangeDutyCycle(100)
+			pwmB.ChangeDutyCycle(100)
 
 		if (cv2.waitKey(33) == ord('w')):
 			print ("Upkey")
@@ -48,6 +54,12 @@ try:
 		if (cv2.waitKey(33) == ord('a')):
 			print ("Leftkey")
 			x = 1
+			GPIO.output(dirA1,True)
+			GPIO.output(dirA2,False)
+			GPIO.output(dirB1,True)
+			GPIO.output(dirB2,False)
+			pwmA.ChangeDutyCycle(100)
+			pwmB.ChangeDutyCycle(75)
 
 		if (cv2.waitKey(33) == ord('s')):
 			print ("Dowkey")
@@ -62,6 +74,12 @@ try:
 		if (cv2.waitKey(33) == ord('d')):
 			print ("Rightkey")
 			x = 1
+			GPIO.output(dirA1,True)
+			GPIO.output(dirA2,False)
+			GPIO.output(dirB1,True)
+			GPIO.output(dirB2,False)
+			pwmA.ChangeDutyCycle(75)
+			pwmB.ChangeDutyCycle(100)
 
 		if (cv2.waitKey(33) == ord('q')):
 			cap.release()
