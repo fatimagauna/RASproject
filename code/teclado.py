@@ -34,7 +34,7 @@ while(1):
     cv2.imshow('Video', frame)
 
     if ((cv2.waitKey(33) == -1) and (x == 1)):
-	print ("Ninguna")
+	print("Ninguna")
 	x = 0
 
     if (cv2.waitKey(33) == ord('w')):
@@ -50,11 +50,11 @@ while(1):
 
 
     if (cv2.waitKey(33) == ord('a')):
-	print ("Leftkey")
+	print("Leftkey")
 	x = 1
 
     if (cv2.waitKey(33) == ord('s')):
-	print ("Dowkey")
+	print("Dowkey")
 	x = 1
 	GPIO.output(dirA1,False)
 	GPIO.output(dirA2,True)
@@ -65,7 +65,7 @@ while(1):
 
 
     if (cv2.waitKey(33) == ord('d')):
-	print ("Rightkey")
+	print("Rightkey")
 	x = 1
 
     if (cv2.waitKey(33) == ord('q')):
