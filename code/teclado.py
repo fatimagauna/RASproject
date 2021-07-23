@@ -26,48 +26,51 @@ cap = cv2.VideoCapture(0)
 
 x = 1
 
+try:
+	while(1):
+		ret, frame = cap.read()
+		cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
+		cv2.imshow('Video', frame)
+		if ((cv2.waitKey(33) == -1) and (x == 1)):
+			print ("Ninguna")
+			x = 0
 
-while(1):
-	ret, frame = cap.read()
-	cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
-	cv2.imshow('Video', frame)
-	if ((cv2.waitKey(33) == -1) and (x == 1)):
-		print ("Ninguna")
-		x = 0
-	
-	if (cv2.waitKey(33) == ord('w')):
-		print ("Upkey")
-		x = 1
-		GPIO.output(dirA1,True)
-		GPIO.output(dirA2,False)
-		GPIO.output(dirB1,True)
-		GPIO.output(dirB2,False)
-		pwmA.ChangeDutyCycle(100)
-		pwmB.ChangeDutyCycle(100)
+		if (cv2.waitKey(33) == ord('w')):
+			print ("Upkey")
+			x = 1
+			GPIO.output(dirA1,True)
+			GPIO.output(dirA2,False)
+			GPIO.output(dirB1,True)
+			GPIO.output(dirB2,False)
+			pwmA.ChangeDutyCycle(100)
+			pwmB.ChangeDutyCycle(100)
 
-	if (cv2.waitKey(33) == ord('a')):
-		print ("Leftkey")
-		x = 1
-	
-	if (cv2.waitKey(33) == ord('s')):
-		print ("Dowkey")
-		x = 1
-		GPIO.output(dirA1,False)
-		GPIO.output(dirA2,True)
-		GPIO.output(dirB1,False)
-		GPIO.output(dirB2,True)
-		pwmA.ChangeDutyCycle(100)
-		pwmB.ChangeDutyCycle(100)
+		if (cv2.waitKey(33) == ord('a')):
+			print ("Leftkey")
+			x = 1
 
-	if (cv2.waitKey(33) == ord('d')):
-		print ("Rightkey")
-		x = 1
+		if (cv2.waitKey(33) == ord('s')):
+			print ("Dowkey")
+			x = 1
+			GPIO.output(dirA1,False)
+			GPIO.output(dirA2,True)
+			GPIO.output(dirB1,False)
+			GPIO.output(dirB2,True)
+			pwmA.ChangeDutyCycle(100)
+			pwmB.ChangeDutyCycle(100)
 
-	if (cv2.waitKey(33) == ord('q')):
-		cap.release()
-		cv2.destroyAllWindows()
-		break
+		if (cv2.waitKey(33) == ord('d')):
+			print ("Rightkey")
+			x = 1
+
+		if (cv2.waitKey(33) == ord('q')):
+			cap.release()
+			cv2.destroyAllWindows()
+			break
 		
+except KeyboardInterrupt:
+    GPIO.cleanup() 
+
 
 #Always at the end of the code
 GPIO.cleanup()
