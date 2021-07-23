@@ -26,16 +26,16 @@ try:
     while(1):
         GPIO.output(dirA1,True)
         GPIO.output(dirA2,False)
-        pwmA.ChangeDutyCycle(75)
         GPIO.output(dirB1,True)
         GPIO.output(dirB2,False)
+        pwmA.ChangeDutyCycle(75)
         pwmB.ChangeDutyCycle(75)
         time.sleep(5)
         GPIO.output(dirA1,False)
         GPIO.output(dirA2,True)
-        pwmA.ChangeDutyCycle(75)
         GPIO.output(dirB1,False)
         GPIO.output(dirB2,True)
+        pwmA.ChangeDutyCycle(75)
         pwmB.ChangeDutyCycle(75)
         time.sleep(5)
         
