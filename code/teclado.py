@@ -26,18 +26,7 @@ cap = cv2.VideoCapture(0)
 
 x = 1
 
-
-while(1):
-    ret, frame = cap.read()
-
-    cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
-    cv2.imshow('Video', frame)
-
-    if ((cv2.waitKey(33) == -1) and (x == 1)):
-	x = 0
-
-    if (cv2.waitKey(33) == ord('w')):
-	x = 1
+def adelante():
 	GPIO.output(dirA1,True)
 	GPIO.output(dirA2,False)
 	GPIO.output(dirB1,True)
@@ -45,13 +34,7 @@ while(1):
 	pwmA.ChangeDutyCycle(100)
 	pwmB.ChangeDutyCycle(100)
 
-
-
-    if (cv2.waitKey(33) == ord('a')):
-	x = 1
-
-    if (cv2.waitKey(33) == ord('s')):
-	x = 1
+def atras():
 	GPIO.output(dirA1,False)
 	GPIO.output(dirA2,True)
 	GPIO.output(dirB1,False)
@@ -60,7 +43,34 @@ while(1):
 	pwmB.ChangeDutyCycle(100)
 
 
+while(1):
+    ret, frame = cap.read()
+
+    cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
+    cv2.imshow('Video', frame)
+
+    if ((cv2.waitKey(33) == -1) and (x == 1)):
+	print ("Ninguna")
+	x = 0
+
+    if (cv2.waitKey(33) == ord('w')):
+	print ("Upkey")
+	x = 1
+	adelante()
+
+
+    if (cv2.waitKey(33) == ord('a')):
+	print ("Leftkey")
+	x = 1
+
+    if (cv2.waitKey(33) == ord('s')):
+	print ("Dowkey")
+	x = 1
+	atras()
+
+
     if (cv2.waitKey(33) == ord('d')):
+	print ("Rightkey")
 	x = 1
 
     if (cv2.waitKey(33) == ord('q')):
