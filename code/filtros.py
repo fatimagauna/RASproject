@@ -162,10 +162,10 @@ def pipeline(id_cam):
 					    y_left.append(y1)
 					    y_left.append(y2)
 
-				# Outliers lines; i.e., lines that neither belong to left nor right lane lines
-				else:
-				    pass
-			
+					# Outliers lines; i.e., lines that neither belong to left nor right lane lines
+					else:
+					    pass
+
 			cv2.imshow("Canny image with detected lines", img_colour_with_lines)
 			
 			x_min = np.min(x_left)
