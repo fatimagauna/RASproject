@@ -128,37 +128,30 @@ def pipeline(id_cam):
 
 			# Loop through each detected line
 			for line in hough_lines:
-			    for x1, y1, x2, y2 in line:
+                    		for x1, y1, x2, y2 in line:
+					slope = (y2 - y1) / (x2 - x1) #Pendiente
+					if math.fabs(slope) < param['extremeSlope']: # <-- Only consider extreme slope
+					    continue   #Continue para ignorar esta pendiente y seguir con la siguiente
+					if slope <= 0: # <-- Si es negativo es linea del lado izquierda
+					    left_line_x.extend([x1, x2])
+					    left_line_y.extend([y1, y2])
+					else: # <-- Si no es de la derecha
+					    right_line_x.extend([x1, x2])
+					    right_line_y.extend([y1, y2])
 
-				# Compute slope for current line
-				slope = (y2-y1) / (x2-x1)
-				slope_deg = np.rad2deg(np.arctan(slope))
-				cv2.line(img_colour_with_lines, (x1, y1), (x2, y2), (0,0,255), 10)
+					# Otherwise, the current line belongs to the left lane line
+					elif (slope_deg >= (left_slope_mean - 1*left_slope_std)) and (slope_deg < (left_slope_mean + 1*left_slope_std)):
+					    left_lines.append(line)
+					    cv2.line(img_colour_with_lines, (x1, y1), (x2, y2), (0,0,255), 10)
+					    left_slope.append(slope)
+					    x_left.append(x1)
+					    x_left.append(x2)
+					    y_left.append(y1)
+					    y_left.append(y2)
 
-				# If slope is positive, the current line belongs to the right lane line
-				if (slope_deg >= (right_slope_mean - 1*right_slope_std)) and (slope_deg < (right_slope_mean + 1*right_slope_std)):
-				    right_lines.append(line)
-				    cv2.line(img_colour_with_lines, (x1, y1), (x2, y2), (255,0,0), 10)
-				    right_slope.append(slope)
-
-				    x_right.append(x1)
-				    x_right.append(x2)
-				    y_right.append(y1)
-				    y_right.append(y2)
-
-				# Otherwise, the current line belongs to the left lane line
-				elif (slope_deg >= (left_slope_mean - 1*left_slope_std)) and (slope_deg < (left_slope_mean + 1*left_slope_std)):
-				    left_lines.append(line)
-				    cv2.line(img_colour_with_lines, (x1, y1), (x2, y2), (0,0,255), 10)
-				    left_slope.append(slope)
-				    x_left.append(x1)
-				    x_left.append(x2)
-				    y_left.append(y1)
-				    y_left.append(y2)
-
-				# Outliers lines; i.e., lines that neither belong to left nor right lane lines
-				else:
-				    pass
+					# Outliers lines; i.e., lines that neither belong to left nor right lane lines
+					else:
+					    pass
 
 			cv2.imshow("Canny image with detected lines", img_colour_with_lines)
 
