@@ -31,7 +31,7 @@ def region_of_interest(img, vertices):
     return masked_image
 
 
-def pipeline(id_cam)
+def pipeline(id_cam):
 
 	vid = cv2.VideoCapture(id_cam)
 			       
